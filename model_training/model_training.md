@@ -228,6 +228,22 @@ X_train = fill_0.fit_transform(X_train)
 X_test = fill_0.fit_transform(X_test)
 ```
 
+```python
+# This is deprecated. DeprecationWarning: Class Imputer is deprecated; Imputer was deprecated in version 0.20 and will be removed in 0.22. Import impute.SimpleImputer from sklearn instead.
+warnings.warn(msg, category=DeprecationWarning)
+```
+
+FIX
+```python
+from sklearn import impute
+
+#Impute with mean all 0 readings
+fill_0 = impute.SimpleImputer(missing_values=0, strategy="mean", verbose=0)
+
+X_train = fill_0.fit_transform(X_train)
+X_test = fill_0.fit_transform(X_test)
+```
+
 এখানে fill_0 ও কিন্তু একধরণের মডেল, যার কাজ হল 0 ভ্যালুগুলোকে `mean` স্ট্র্যাটেজির মাধ্যমে একটা লজিক্যাল ভ্যালু দিয়ে রিপ্লেস করা।
 
 আমরা এই পরিবর্তিত ট্রেইন ভ্যালু দিয়ে ট্রেইন করব এবং টেস্ট ভ্যালু দিয়ে টেস্ট করব।
